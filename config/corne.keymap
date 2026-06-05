@@ -9,6 +9,15 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+        // Step 1: Create a conditional rule that activates Layer 3 when both Layer 1 and 2 are active
+        conditional_layers {
+            compatible = "zmk,conditional-layers";
+            tri_layer {
+                if-layers = <1 2>;
+                then-layer = <3>;
+            };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -50,6 +59,20 @@
    &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
    &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
                              &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
+                        >;
+                };
+
+                adjust_layer {
+// -----------------------------------------------------------------------------------------
+// |      |     |     |     |     |     |   |     |     |     |     |     |      |
+// |      |     |     |     |UNLCK|     |   |     |     |     |     |     |      |
+// |      |     |     |     |     |     |   |     |     |     |     |     |      |
+//                    |     |     |     |   |     |     |     |
+                        bindings = <
+   &trans &trans &trans &trans &trans         &trans   &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &studio_unlock &trans   &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans         &trans   &trans &trans &trans &trans &trans &trans
+                        &trans &trans         &trans   &trans &trans &trans
                         >;
                 };
         };
